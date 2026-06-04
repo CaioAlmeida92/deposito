@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: comprovante
+
+cloud:
+  aws:
+    region:
+      static: sa-east-1
+    credentials:
+      profile: default
+
+app:
+  aws:
+    lambda-name: "validador-transacao-deposito"
+    sqs-queue-url: "https://sqs.sa-east-1.amazonaws.com/277137591975/fila-transacoes-deposito"
+    s3-bucket-name: "comprovantes-deposito-277137591975-sa-east-1-an"
+    dynamo-table-name: "Transacoes"
