@@ -10,11 +10,9 @@ import java.math.BigDecimal;
 public class DepositoRequest {
 
     @NotNull(message = "A agência é obrigatória.")
-    @NotBlank
     private Integer agencia;
 
     @NotNull(message = "A conta é obrigatória.")
-    @NotBlank
     private Integer conta;
 
     @NotNull(message = "O banco é obrigatório")
@@ -23,7 +21,6 @@ public class DepositoRequest {
     private String banco;
 
     @NotNull(message = "O valor é obrigatório")
-    @NotBlank
     @Positive(message = "O valor deve ser maior que zero.")
     private BigDecimal valor;
 

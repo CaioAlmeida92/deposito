@@ -6,14 +6,12 @@ import java.util.Objects;
 
 public class ValidationResponse {
 
-    @JsonProperty("isValid")
+    @JsonProperty("valid")
     private boolean valid;
 
     private String mensagem;
 
-    public ValidationResponse(){
-
-    }
+    public ValidationResponse(){}
 
     public ValidationResponse(boolean valid, String mensagem){
         this.valid = valid;

@@ -34,7 +34,7 @@
 			<dependency>
 				<groupId>io.awspring.cloud</groupId>
 				<artifactId>spring-cloud-aws-dependencies</artifactId>
-				<version>3.3.0</version>
+				<version>4.0.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -70,6 +70,11 @@
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>dynamodb-enhanced</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.awspring.cloud</groupId>
+			<artifactId>spring-cloud-aws-starter-dynamodb</artifactId>
 		</dependency>
 
 		<dependency>

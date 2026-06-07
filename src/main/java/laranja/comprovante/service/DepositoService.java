@@ -1,5 +1,6 @@
 package laranja.comprovante.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
 import laranja.comprovante.dto.DepositoEvent;
 import laranja.comprovante.dto.DepositoRequest;
@@ -53,9 +54,12 @@ public class DepositoService {
             InvokeResponse invokeResponse = this.lambdaClient.invoke(invokeRequest);
 
             String responseJson = invokeResponse.payload().asUtf8String();
+            JsonNode rootNode = mapper.readTree(responseJson);
+            String bodyInternoJson = rootNode.get("body").asText();
+
             System.out.println("Resposta da lambda de validação: " + responseJson);
 
-            validacao = mapper.readValue(responseJson, ValidationResponse.class);
+            validacao = mapper.readValue(bodyInternoJson, ValidationResponse.class);
 
         } catch (Exception e) {
             throw new RuntimeException("Falha técnica ao integrar com a Lambda de validação");
