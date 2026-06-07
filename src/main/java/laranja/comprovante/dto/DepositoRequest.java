@@ -1,28 +1,34 @@
 package laranja.comprovante.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import laranja.comprovante.enums.Banco;
 
 import java.math.BigDecimal;
 
 public class DepositoRequest {
 
     @NotNull(message = "A agência é obrigatória.")
+    @Min(value = 1000, message = "A agência deve ter exatamente 4 dígitos.")
+    @Max(value = 9999, message = "A agência deve ter exatamente 4 dígitos.")
     private Integer agencia;
 
     @NotNull(message = "A conta é obrigatória.")
+    @Min(value = 10000, message = "A conta deve ter exatamente 5 dígitos.")
+    @Max(value = 99999, message = "A conta deve ter exatamente 5 dígitos.")
     private Integer conta;
 
-    @NotNull(message = "O banco é obrigatório")
-    @NotBlank
+    @NotBlank(message = "O banco é obrigatório")
     @Size(max = 15, message = "O nome do banco deve ter no máximo 15 caracteres.")
     private String banco;
 
     @NotNull(message = "O valor é obrigatório")
     @Positive(message = "O valor deve ser maior que zero.")
     private BigDecimal valor;
+
+    @AssertTrue(message = "O banco informado não é permitido pelo sistema.")
+    public boolean isBancoValido(){
+        return Banco.contains(this.banco);
+    }
 
     public DepositoRequest(){
     }
