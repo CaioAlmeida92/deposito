@@ -114,4 +114,37 @@ public class DepositoRequestTest {
         assertEquals("O banco é obrigatório", mensagemErro);
     }
 
+    @Test
+    public void deveFalharQuandoValorEstiverNulo(){
+        DepositoRequest depositoRequest = new DepositoRequest(1234, 12345, "Laranja", null);
+        Set<ConstraintViolation<DepositoRequest>> violations = validator.validate(depositoRequest);
+
+        System.out.println(violations);
+        assertEquals(1, violations.size());
+        String mensagemErro = violations.iterator().next().getMessage();
+        assertEquals("O valor é obrigatório", mensagemErro);
+    }
+
+    @Test
+    public void deveFalharQuandoValorEstiverComValorZero(){
+        DepositoRequest depositoRequest = new DepositoRequest(1234, 12345, "Laranja", new BigDecimal("0.00"));
+        Set<ConstraintViolation<DepositoRequest>> violations = validator.validate(depositoRequest);
+
+        System.out.println(violations);
+        assertEquals(1, violations.size());
+        String mensagemErro = violations.iterator().next().getMessage();
+        assertEquals("O valor deve ser maior que zero.", mensagemErro);
+    }
+
+    @Test
+    public void deveFalharQuandoValorEstiverComValorNegativo(){
+        DepositoRequest depositoRequest = new DepositoRequest(1234, 12345, "Laranja", new BigDecimal("-10.00"));
+        Set<ConstraintViolation<DepositoRequest>> violations = validator.validate(depositoRequest);
+
+        System.out.println(violations);
+        assertEquals(1, violations.size());
+        String mensagemErro = violations.iterator().next().getMessage();
+        assertEquals("O valor deve ser maior que zero.", mensagemErro);
+    }
+
 }
