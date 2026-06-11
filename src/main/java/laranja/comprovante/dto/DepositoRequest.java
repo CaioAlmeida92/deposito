@@ -27,6 +27,9 @@ public class DepositoRequest {
 
     @AssertTrue(message = "O banco informado não é permitido pelo sistema.")
     public boolean isBancoValido(){
+        if(this.banco == null || this.banco.isBlank()){
+            return true;
+        }
         return Banco.contains(this.banco);
     }
 
